@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Partner;
+use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -18,18 +19,35 @@ class CompanyController extends Controller
     }
 
     public function getProject(){
-        return view('admin.company.project.index');
+        return view('admin.company.project.index', [
+            'project' => Project::get('*'),
+        ]);
     }
+
     public function add(){
         return view ('admin.company.account.add');
     }
+
+    public function addProject(){
+        return view ('admin.company.project.add');
+    }
+
     public function edit($id){
         $data = Partner::whereId($id)->first();
         // dd($data);
         return view ('admin.company.account.edit',[
             'company' => $data,
         ]);
-}
+    }
+
+    public function editProject($id){
+        $data = Project::whereId($id)->first();
+        // dd($data);
+        return view ('admin.company.project.edit',[
+            'project' => $data,
+        ]);
+    }
+
     public function store(Request $request)
     {
         // dd($request->all());
@@ -66,6 +84,37 @@ class CompanyController extends Controller
         return redirect()->route('company')
         ->with('success', 'News succesfully added');
     }
+
+    public function storeProject(Request $request)
+    {
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'name'=> 'required',
+            'description'=> 'required',
+            'address'=> 'required',
+            'photo'=> 'required',
+            'planting_date'=> 'required',
+                
+        ]);
+
+        if($request->file('photo')){
+            $validatedData['photo'] = $request->file('photo')->store('images', 'public');
+        }
+
+        $photo = $request->file('photo')->store('images', 'public');
+        
+
+        Project::create([
+            'name' =>$request->input('name'),
+            'description' =>$request->input('description'),
+            'address' =>$request->input('address'),
+            'photo' =>$photo,
+            'planting_date' =>$request->input('planting_date'),
+        ]);
+        return redirect()->route('projects')
+        ->with('success', 'project succesfully added');
+    }
+
     public function update(Request $request, $id)
     {
         // dd($request->all());
@@ -85,9 +134,28 @@ class CompanyController extends Controller
         ->update($validatedData);
 
 
-        return redirect()->route('company')
+        return redirect()->route('company/projects')
         ->with('success', 'Data Berhasil diupdate');
 
+    }
+    public function updateProject(Request $request, $id)
+    {
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'name'=> 'required',
+            'description'=> 'required',
+            'address'=> 'required',
+            'photo'=> 'required',
+            'planting_date'=> 'required',
+                
+        ]);
+
+        $test = Project::where('id', $id)
+        ->update($validatedData);
+
+
+        return redirect()->route('projects')
+        ->with('success', 'Data Berhasil diupdate');
     }
     public function destroy($id)
     {
@@ -101,6 +169,20 @@ class CompanyController extends Controller
         $data->delete();
 
         return redirect()->route('company');
+    }
+
+    public function destroyProject($id)
+    {
+
+        $data = Project::where('id', $id)->first();
+        // dd($product);
+        if ($data == null) {
+            return redirect()->route('projects');
+        }
+
+        $data->delete();
+
+        return redirect()->route('projects');
     }
 
 }

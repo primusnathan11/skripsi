@@ -100,8 +100,8 @@
                                                                     <div class="dropdown-menu dropdown-menu-end">
                                                                         <ul class="link-list-opt no-bdr">
                                                                             <li><a href="{{ url('newsletter/edit', $news->id) }}"><em class="icon ni ni-edit"></em><span>Edit Product</span></a></li>
-                                                                            <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
-                                                                            <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li>
+                                                                            <!-- <li><a href="#"><em class="icon ni ni-eye"></em><span>View Product</span></a></li>
+                                                                            <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product Orders</span></a></li> -->
                                                                             <form action="{{ route('delete.news', $news->id) }}" method="POST">
                                                                             @csrf
                                                                             @method('DELETE')

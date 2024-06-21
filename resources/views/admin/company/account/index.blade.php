@@ -106,13 +106,11 @@
                                         <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <ul class="link-list-opt no-bdr">
-                                                <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick View</span></a></li>
+                                                <!-- <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick View</span></a></li>
                                                 <li><a href="#"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
                                                 <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li>
-                                                <li class="divider"></li>
+                                                <li class="divider"></li> -->
                                                 <li><a href="{{ route('edit.company', $company->id) }}"><em class="icon ni ni-repeat"></em><span>Update User</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-shield-star"></em><span>Reset Pass</span></a></li>
-                                                <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset 2FA</span></a></li>
                                                 <form action="{{ route('delete.company', $company->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')

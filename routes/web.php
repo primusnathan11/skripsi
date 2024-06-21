@@ -152,7 +152,12 @@ Route::middleware(['auth', 'staff'])->group(function (){
         Route::get('/accounts/edit/{id}','edit')->name('edit.company');
         Route::put('/accounts/edit/{id}','update')->name('update.company');
         Route::delete('/accounts/{id}','destroy')->name('delete.company');
-        Route::get('/projects','getProject');
+        Route::get('/projects','getProject')->name('projects');
+        Route::get('/projects/add','addProject')->name('add.projects');
+        Route::post('/projects/store','storeProject')->name('store.projects');
+        Route::get('/projects/edit/{id}','editProject')->name('edit.projects');
+        Route::put('/projects/edit/{id}','updateProject')->name('update.projects');
+        Route::delete('/projects/{id}','destroyProject')->name('delete.projects');
     });
     Route::prefix('donation')
     ->controller(DonationController::class)
