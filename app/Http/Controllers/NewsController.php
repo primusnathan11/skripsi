@@ -54,6 +54,7 @@ public function generate_news(Request $request){
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $response = curl_exec($ch);
+    
     if (curl_errno($ch)) {
         $error_msg = curl_error($ch);
         curl_close($ch);

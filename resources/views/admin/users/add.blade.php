@@ -25,9 +25,27 @@
                             </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="fv-subject">PIC</label>
+                        <label class="form-label" for="fv-subject">Email</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="fv-subject" name="pic" required>
+                                <input type="email" class="form-control" id="fv-subject" name="email" required>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="fv-subject">Password</label>
+                            <div class="form-control-wrap">
+                                <input type="password" class="form-control" id="fv-subject" name="password" required>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="fv-subject">No. Telepon</label>
+                            <div class="form-control-wrap">
+                                <input type="number" class="form-control" id="fv-subject" name="telp" required>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="fv-subject">No. Telepon</label>
+                            <div class="form-control-wrap">
+                                <input type="number" class="form-control" id="fv-subject" name="telp" required>
                             </div>
                     </div>
                 </div>
