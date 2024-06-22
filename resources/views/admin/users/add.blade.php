@@ -13,7 +13,7 @@
     </div>
     <div class="card">
         <div class="card-inner">
-            <form action="{{ route('store.ukm') }}" method="POST" enctype="multipart/form-data" class="form-validate">
+            <form action="{{ route('store.user') }}" method="POST" enctype="multipart/form-data" class="form-validate">
             @csrf
                 <div class="row g-gs">
                 <div class="col-md-12">
@@ -43,25 +43,20 @@
                             </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="fv-subject">No. Telepon</label>
+                        <label class="form-label" for="fv-subject">Role</label>
                             <div class="form-control-wrap">
-                                <input type="number" class="form-control" id="fv-subject" name="telp" required>
+                                <!-- <input type="text" class="form-control" id="fv-subject" name="role" required> -->
+                                <select class="form-control" id="default-06" name="role">
+                                        
+                                            <option value="admin">admin</option>
+                                            <option value="staff">staff</option>
+                                            <option value="creator">creator</option>
+                                        
+                                    </select>
                             </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label" for="isPublish">Status</label>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="radio1" name="status" value="Enabled" >Enabled
-                        <label class="form-check-label" for="radio1"></label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="radio2" name="status" value="Disabled">Disabled
-                        <label class="form-check-label" for="radio2"></label>
-                    </div>
-            </div>
                     <div class="col-md-12">
-                                <button type="submit" class="btn btn-lg btn-primary"> Tambahkan UKM Baru </button>
+                                <button type="submit" class="btn btn-lg btn-primary"> Tambahkan Pengguna Baru </button>
                             </form>
                         </div>
                     </div>

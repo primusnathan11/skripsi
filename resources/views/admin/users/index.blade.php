@@ -92,7 +92,7 @@
                                                                             <form action="{{ route('delete.user', $user->id) }}" method="POST">
                                                                             @csrf
                                                                             @method('DELETE')
-                                                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Remove this UKM?')">Remove User</button>
+                                                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Remove this User?')">Remove User</button>
                                                                         </form>
                                                                         </ul>
                                                                     </div>
