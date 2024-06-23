@@ -164,15 +164,28 @@ Route::middleware(['auth', 'staff'])->group(function (){
     ->group(function (){
         Route::get('/manage','getManage')->name('get.manage');
         Route::get('/manage/add','add');
-        Route::post('/manage/store', 'store')->name('store.donation');
         Route::get('/manage/edit/{id}','edit')->name('edit.donation');
         Route::put('/manage/edit/{id}','update')->name('update.donation');
+        Route::get('/manage','getManage');
+        Route::get('/transaction','getTransaction')->name('get.transaction');
+        Route::get('/add','add');
+        Route::post('/store', 'store')->name('store.donation');
         Route::post('/filtered', 'filter')->name('filter.donation');
+        Route::get('/detail/{id}','getDetail')->name('get.detail');
         Route::put('/update_publish/{id}','update_publish')->name('update.publish');
         Route::put('/update_unpublish/{id}','update_unpublish')->name('update.unpublish');
         Route::put('/update_enable/{id}','update_enable')->name('update.enable.donation');
         Route::put('/update_disable/{id}','update_disable')->name('update.disable.donation');
         Route::delete('/manage/{id}', 'destroy')->name('destroy.donation');
+
+        Route::get('/activity/{id}','getActivity')->name('get.activity');
+        Route::get('/activity/add/{id}','addActivity');
+        Route::post('/activity/store', 'storeActivity')->name('store.activity');
+        Route::get('/activity/edit/{id}','editActivity')->name('edit.activity');
+        Route::put('/activity/update/{id}','updateActivity')->name('update.activity');
+        Route::get('/activity/sendActivity/{id}/{id_activity}','sendEmail')->name('send.activity');
+        Route::delete('/activity/destroy/{id}', 'destroyActivity')->name('destroy.activity');
+
     });
     Route::prefix('ukm')
     ->controller(UKMController::class)

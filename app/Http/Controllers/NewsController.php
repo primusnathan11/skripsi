@@ -25,9 +25,8 @@ class NewsController extends Controller
 }
 public function generate_news(Request $request){
     $prompt = $request->get('prompt');
-    $url = 'https://us-central1-aiplatform.googleapis.com/v1/projects/herbify-403310/locations/us-central1/publishers/google/models/gemini-1.5-pro:streamGenerateContent';
-    $accessToken = "ya29.a0AXooCgsJBQ_acdIn3qyPZgHxYwvoXkwZVpNkXWE6NGtK6AAtrxvqHt1doTfcDcfXYKARL_N9TvceYxWy5dmQbF3TPDSYf5kKcgCXuLfBYG_MH4xAzq9_vPgm9gZ4GVsSxsoBvv6pLXhBVZPG1lgNgODVmssBxVWi76GXeHtBCW6tEtrto8vDzeQhPbSNWGonK7pyt2P1WNVWuVtUnc8mzHPSoN_keQoL3EHceL9Fq19W_dUBaoOvq5eYVROAwRr7wHKED_y5grHnhxglaWtOps1_PTLSdpNJ2CKCfNTwMoLJ69B1lxmKtMgFJJp9GPiB4aCtZM7FYiMmHl2JQisih53Qxh9g6c9yXB1FCFrWHJAfW5NmI9lU8EjdTVLnbRHLxoLFTqMCmvOml0plEmOQohOTSckvM7rlUgaCgYKAa4SARMSFQHGX2MiQi762RMrot8YkGhguuYbFQ0425";
-
+    $url = env('GEMINI_URL');
+    $accessToken = env('GEMINI_KEY');
     $postData = [
         "contents" => [
             "role" => "user",
@@ -54,7 +53,7 @@ public function generate_news(Request $request){
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $response = curl_exec($ch);
-    
+
     if (curl_errno($ch)) {
         $error_msg = curl_error($ch);
         curl_close($ch);
@@ -63,9 +62,22 @@ public function generate_news(Request $request){
     curl_close($ch);
 
     $responseData = json_decode($response, true);
-
     return response()->json($responseData);
+
+    // $result = "";
+    //     foreach ($responseData as $item) {
+    //         if (isset($item['candidates'][0]['content']['parts'])) {
+    //             foreach ($item['candidates'][0]['content']['parts'] as $part) {
+    //                 $result .= $part['text'];
+    //             }
+    //         }
+    //     }
+
+    //     $cleaned_data = str_replace('*', '', $result);
+    //     $data['result'] = $cleaned_data;
+
 }
+
 
     public function add(){
         return view ('admin.news.add');
