@@ -24,10 +24,12 @@ class NewsController extends Controller
         ]);
 }
 public function generate_news(Request $request){
+    // $test_data = "halo";
+
+    // return response()->json($test_data);
     $prompt = $request->get('prompt');
     $url = 'https://us-central1-aiplatform.googleapis.com/v1/projects/herbify-403310/locations/us-central1/publishers/google/models/gemini-1.5-pro:streamGenerateContent';
-    $accessToken = "ya29.a0AXooCgsJBQ_acdIn3qyPZgHxYwvoXkwZVpNkXWE6NGtK6AAtrxvqHt1doTfcDcfXYKARL_N9TvceYxWy5dmQbF3TPDSYf5kKcgCXuLfBYG_MH4xAzq9_vPgm9gZ4GVsSxsoBvv6pLXhBVZPG1lgNgODVmssBxVWi76GXeHtBCW6tEtrto8vDzeQhPbSNWGonK7pyt2P1WNVWuVtUnc8mzHPSoN_keQoL3EHceL9Fq19W_dUBaoOvq5eYVROAwRr7wHKED_y5grHnhxglaWtOps1_PTLSdpNJ2CKCfNTwMoLJ69B1lxmKtMgFJJp9GPiB4aCtZM7FYiMmHl2JQisih53Qxh9g6c9yXB1FCFrWHJAfW5NmI9lU8EjdTVLnbRHLxoLFTqMCmvOml0plEmOQohOTSckvM7rlUgaCgYKAa4SARMSFQHGX2MiQi762RMrot8YkGhguuYbFQ0425";
-
+    $accessToken = "ya29.a0AXooCgv5_3OeKlPpHoXyAbUqCgiX6ZRfmw7isLC7aCw7dAV-W-FX6zdJu8fg_-rfknlxAIG3CJc6BPcWEG38TjVXxMIt16lin8qMRwakOUjbu1S4Iti2kOwFrkyhQCdOm225Dv2Wz4YDEtyOqwqEMeKEW_8uDBmaVdcZJRdatnx4wKLwkebLLUU7bPxInCylkZB7IgPYqi2wIVGitpjqSNKiOFZ5RltAj6Vc4rednFiY6XOvzffNKAuQNeOYcRO1xSNmsp5y_c4th48w03_ZCxAD3Vk5VcW9SejVPGG49T-Y6Q6yBP6lc_Kw11afdTdP48GcoUngFGu0FSdWZW0ePiN3rCHS1UGVXz6zALPZDIAHy_O1LnYZlfcEBfN8TgAfSbQCgxmLKQ7FhJPeIqmp-GjW5mkF3S-KaCgYKAQMSARMSFQHGX2MiYdEB7rS2L0MiF-AhVlOq6Q0423";
     $postData = [
         "contents" => [
             "role" => "user",
@@ -64,7 +66,47 @@ public function generate_news(Request $request){
 
     $responseData = json_decode($response, true);
 
-    return response()->json($responseData);
+    $result = "";
+        foreach ($responseData as $item) {
+            if (isset($item['candidates'][0]['content']['parts'])) {
+                foreach ($item['candidates'][0]['content']['parts'] as $part) {
+                    $result .= $part['text'];
+                }
+            }
+        }
+        // dd($result);
+        $cleaned_data = str_replace('*', '', $result);
+        $data['result'] = $cleaned_data;
+
+        // "Unable to submit request because it must include one of the following input parameters: text, fileData, inlineData, functionCall or functionResponse. Learn more: https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/gemini"
+    return response()->json($cleaned_data);
+
+        // return view ('admin.news.add', [
+        //     'cleaned_data' => $cleaned_data,
+        // ]);
+
+        
+        
+        // return response()->json($cleaned_data);
+    // $textResult = '';
+    // if (isset($responseData) && is_array($responseData)) {
+    //     foreach ($responseData as $item) {
+    //         if (isset($item['candidates'])) {
+    //             foreach ($item['candidates'] as $candidate) {
+    //                 if (isset($candidate['content']['parts'])) {
+    //                     foreach ($candidate['content']['parts'] as $part) {
+    //                         if (isset($part['text'])) {
+    //                             $textResult .= $part['text'];
+    //                             return response()->json($textResult);
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+
 }
 
     public function add(){
