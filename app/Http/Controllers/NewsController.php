@@ -24,6 +24,9 @@ class NewsController extends Controller
         ]);
 }
 public function generate_news(Request $request){
+    // $test_data = "halo";
+
+    // return response()->json($test_data);
     $prompt = $request->get('prompt');
     $url = env('GEMINI_URL');
     $accessToken = env('GEMINI_KEY');
@@ -62,22 +65,9 @@ public function generate_news(Request $request){
     curl_close($ch);
 
     $responseData = json_decode($response, true);
+
     return response()->json($responseData);
-
-    // $result = "";
-    //     foreach ($responseData as $item) {
-    //         if (isset($item['candidates'][0]['content']['parts'])) {
-    //             foreach ($item['candidates'][0]['content']['parts'] as $part) {
-    //                 $result .= $part['text'];
-    //             }
-    //         }
-    //     }
-
-    //     $cleaned_data = str_replace('*', '', $result);
-    //     $data['result'] = $cleaned_data;
-
 }
-
 
     public function add(){
         return view ('admin.news.add');

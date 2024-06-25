@@ -63,15 +63,22 @@
                                     </div>
                             </div>
                         </div>
+                        
                             <label class="form-label" for="fv-phone">Berita</label>
                             <div class="card">
                                 <div class="card-inner">
-                                    <input id="body" value="Editor content goes here" type="hidden" name="body">
-                                    <trix-editor input="body"></trix-editor>
+                                    <input id="body" placeholder="Editor content goes here" type="hidden" name="body">
+                
+                                    <trix-editor id="generateBody">  
+
+                                    </trix-editor>
                                 </div>
                                 <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalDefault">
                                     Buat konten dengan AI
                                 </button>
+                            </div>
+                            <div id="bodyGenerate">
+
                             </div>
                     </div>
                     <label class="form-label" for="isPublish"></label>
@@ -102,21 +109,53 @@
 <div class="modal fade" tabindex="-1" id="modalDefault">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+            <a href="{{ url('newsletter/add')}}" class="close" data-dismiss="modal" aria-label="Close">
                 <em class="icon ni ni-cross"></em>
             </a>
         <div class="modal-header">
             <h5 class="modal-title">Buat konten dengan AI</h5>
         </div>
         <div class="modal-body">
-            <form action="{{route('generate.news')}}" method="POST">
-                @csrf
-                <textarea class="form-control" aria-label="With textarea" name="prompt"></textarea>
-            </form>
-        </div>
-         <div class="modal-footer bg-light">
-            <a href="#" class="btn btn-primary">Generate</a>
-        </div>
+        <form id="keyprompt" >
+            @csrf
+            <input type="text" class="form-control" name="prompt" required>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-primary" id="loadData">Generate</button>
+            </div>
+        </form>
         </div>
     </div>
 </div>
+
+
+<script>
+// <!-- Ajax Return Result on Textarea Code -->
+$(document).ready(function(){
+    $('#loadData').click(function(event){
+        event.preventDefault(); // Prevent the default form submission
+
+        // Serialize form data to send to the server
+        var formData = $('#keyprompt').serialize();
+
+        $.ajax({
+            url: "{{ route('generate.news') }}",
+            type: 'GET', // Ensure this matches your route's expected method
+            data: formData,
+            success: function(response){
+                console.log(response);
+
+                $('#modalDefault').modal('hide');
+                // Assuming your response is like the one provided in the example
+                var generateBody = response.cleaned_data;
+                // $('#generateBody').html(generateBody); // Use .html() to set HTML content
+                $('#generateBody').val(response);
+            },
+            error: function(xhr, status, error){
+                console.log(error);
+            }
+        });
+    });
+});
+
+
+    </script>
