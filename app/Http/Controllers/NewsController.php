@@ -24,12 +24,12 @@ class NewsController extends Controller
         ]);
 }
 public function generate_news(Request $request){
-    // $test_data = "halo";
+    $test_data = "halo";
 
-    // return response()->json($test_data);
+    return response()->json($test_data);
     $prompt = $request->get('prompt');
     $url = 'https://us-central1-aiplatform.googleapis.com/v1/projects/herbify-403310/locations/us-central1/publishers/google/models/gemini-1.5-pro:streamGenerateContent';
-    $accessToken = "ya29.a0AXooCgv5_3OeKlPpHoXyAbUqCgiX6ZRfmw7isLC7aCw7dAV-W-FX6zdJu8fg_-rfknlxAIG3CJc6BPcWEG38TjVXxMIt16lin8qMRwakOUjbu1S4Iti2kOwFrkyhQCdOm225Dv2Wz4YDEtyOqwqEMeKEW_8uDBmaVdcZJRdatnx4wKLwkebLLUU7bPxInCylkZB7IgPYqi2wIVGitpjqSNKiOFZ5RltAj6Vc4rednFiY6XOvzffNKAuQNeOYcRO1xSNmsp5y_c4th48w03_ZCxAD3Vk5VcW9SejVPGG49T-Y6Q6yBP6lc_Kw11afdTdP48GcoUngFGu0FSdWZW0ePiN3rCHS1UGVXz6zALPZDIAHy_O1LnYZlfcEBfN8TgAfSbQCgxmLKQ7FhJPeIqmp-GjW5mkF3S-KaCgYKAQMSARMSFQHGX2MiYdEB7rS2L0MiF-AhVlOq6Q0423";
+    $accessToken = "ya29.a0AXooCgu0m1UgcfwUHdnaAGqT8cWH86r5bneVl5rLck-fJl90s67-4Gw4HxuEI9PDp2J-TqWSogPz51g8j1IaRHPh55PiWqEB1cRoJSE6RJAIDvdMmV-g8saxpYHn4060UozAbDMVxSUUeXHloE_JVIBEBTyL---fTMziX2UPlwibP26mcveEV1OI-BdJIImI9DOn2jax2CMMsbef2eg6JpFgTmbI93gEzSC-ETZGIhXj8snVbJM1LysXAckdGH6rZLW2NTeFO2vrQNxe1FtwSALp-QE6mYn7DqQZm-2DyIm6rbdjBNkzo1sBezKpWy6B-foANK_TnUZgmJFd49RaNhiH_FcP2vmE8dWr5LPcZJSAlTOwL4Ih1wc8URVk1q8g04BkyrAZeJarI0zv4aN1NgcMHlP5RGRKaCgYKASwSARMSFQHGX2Mi_6cJZhu-4X_tqaiKogBVXQ0423";
     $postData = [
         "contents" => [
             "role" => "user",
@@ -136,12 +136,18 @@ public function store(Request $request)
         } else {
             $image = $request->file('image')->store('images/newsletter', 'public');
 
+            // $content = json_decode($request->getContent(), true);
+            // $data = $content['prompt'];
+            // $content = $request->input('content');
+
+
 
 
         NewsArticle::create([
             'title' =>$request->input('title'),
             'slug' =>$request->input('slug'),
-            'content' =>$request->input('body'),
+            'content' =>$request->input('content'),
+            // 'content' =>$content,
             'image' =>$image,
             'author' =>$request->input('author'),
             'is_publish' => $request->input('type'),

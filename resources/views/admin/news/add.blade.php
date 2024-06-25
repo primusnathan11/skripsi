@@ -67,9 +67,9 @@
                             <label class="form-label" for="fv-phone">Berita</label>
                             <div class="card">
                                 <div class="card-inner">
-                                    <input id="body" placeholder="Editor content goes here" type="hidden" name="body">
+                                    <input placeholder="Editor content goes here" type="hidden" name="content">
                 
-                                    <trix-editor id="generateBody">  
+                                    <trix-editor id="generateBody" name="content">  
 
                                     </trix-editor>
                                 </div>
@@ -147,7 +147,7 @@ $(document).ready(function(){
                 $('#modalDefault').modal('hide');
                 // Assuming your response is like the one provided in the example
                 var generateBody = response.cleaned_data;
-                // $('#generateBody').html(generateBody); // Use .html() to set HTML content
+                // $('#generateBody').html(response); // Use .html() to set HTML content
                 $('#generateBody').val(response);
             },
             error: function(xhr, status, error){
