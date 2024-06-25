@@ -24,12 +24,12 @@ class NewsController extends Controller
         ]);
 }
 public function generate_news(Request $request){
-    $test_data = "halo";
+    // $test_data = "halo";
 
-    return response()->json($test_data);
+    // return response()->json($test_data);
     $prompt = $request->get('prompt');
-    $url = 'https://us-central1-aiplatform.googleapis.com/v1/projects/herbify-403310/locations/us-central1/publishers/google/models/gemini-1.5-pro:streamGenerateContent';
-    $accessToken = "ya29.a0AXooCgu0m1UgcfwUHdnaAGqT8cWH86r5bneVl5rLck-fJl90s67-4Gw4HxuEI9PDp2J-TqWSogPz51g8j1IaRHPh55PiWqEB1cRoJSE6RJAIDvdMmV-g8saxpYHn4060UozAbDMVxSUUeXHloE_JVIBEBTyL---fTMziX2UPlwibP26mcveEV1OI-BdJIImI9DOn2jax2CMMsbef2eg6JpFgTmbI93gEzSC-ETZGIhXj8snVbJM1LysXAckdGH6rZLW2NTeFO2vrQNxe1FtwSALp-QE6mYn7DqQZm-2DyIm6rbdjBNkzo1sBezKpWy6B-foANK_TnUZgmJFd49RaNhiH_FcP2vmE8dWr5LPcZJSAlTOwL4Ih1wc8URVk1q8g04BkyrAZeJarI0zv4aN1NgcMHlP5RGRKaCgYKASwSARMSFQHGX2Mi_6cJZhu-4X_tqaiKogBVXQ0423";
+    $url = env('GEMINI_URL');
+    $accessToken = env('GEMINI_KEY');
     $postData = [
         "contents" => [
             "role" => "user",
@@ -56,7 +56,7 @@ public function generate_news(Request $request){
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $response = curl_exec($ch);
-    
+
     if (curl_errno($ch)) {
         $error_msg = curl_error($ch);
         curl_close($ch);
@@ -65,49 +65,22 @@ public function generate_news(Request $request){
     curl_close($ch);
 
     $responseData = json_decode($response, true);
+    return response()->json($responseData);
 
-    $result = "";
-        foreach ($responseData as $item) {
-            if (isset($item['candidates'][0]['content']['parts'])) {
-                foreach ($item['candidates'][0]['content']['parts'] as $part) {
-                    $result .= $part['text'];
-                }
-            }
-        }
-        // dd($result);
-        $cleaned_data = str_replace('*', '', $result);
-        $data['result'] = $cleaned_data;
-
-        // "Unable to submit request because it must include one of the following input parameters: text, fileData, inlineData, functionCall or functionResponse. Learn more: https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/gemini"
-    return response()->json($cleaned_data);
-
-        // return view ('admin.news.add', [
-        //     'cleaned_data' => $cleaned_data,
-        // ]);
-
-        
-        
-        // return response()->json($cleaned_data);
-    // $textResult = '';
-    // if (isset($responseData) && is_array($responseData)) {
+    // $result = "";
     //     foreach ($responseData as $item) {
-    //         if (isset($item['candidates'])) {
-    //             foreach ($item['candidates'] as $candidate) {
-    //                 if (isset($candidate['content']['parts'])) {
-    //                     foreach ($candidate['content']['parts'] as $part) {
-    //                         if (isset($part['text'])) {
-    //                             $textResult .= $part['text'];
-    //                             return response()->json($textResult);
-    //                         }
-    //                     }
-    //                 }
+    //         if (isset($item['candidates'][0]['content']['parts'])) {
+    //             foreach ($item['candidates'][0]['content']['parts'] as $part) {
+    //                 $result .= $part['text'];
     //             }
     //         }
     //     }
-    // }
 
+    //     $cleaned_data = str_replace('*', '', $result);
+    //     $data['result'] = $cleaned_data;
 
 }
+
 
     public function add(){
         return view ('admin.news.add');

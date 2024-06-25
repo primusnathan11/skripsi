@@ -62,12 +62,6 @@
                                         <span class="nk-menu-text">Dashboard</span>
                                     </a>
                                 </li><!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
-                                    <a href="{{ url('/partner')}}" class="nk-menu-link">
-                                        <span class="nk-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 24"><path fill="green" d="M12 9L8.5 5.5L12 2l3.5 3.5L12 9ZM1 20v-4q0-.85.588-1.425T3 14h3.275q.5 0 .95.25t.725.675q.725.975 1.788 1.525T12 17q1.225 0 2.288-.55t1.762-1.525q.325-.425.763-.675t.912-.25H21q.85 0 1.425.575T23 16v4h-7v-2.275q-.875.625-1.888.95T12 19q-1.075 0-2.1-.338T8 17.7V20H1Zm3-7q-1.25 0-2.125-.875T1 10q0-1.275.875-2.138T4 7q1.275 0 2.138.863T7 10q0 1.25-.863 2.125T4 13Zm16 0q-1.25 0-2.125-.875T17 10q0-1.275.875-2.138T20 7q1.275 0 2.138.863T23 10q0 1.25-.863 2.125T20 13Z"/></svg></span>
-                                        <span class="nk-menu-text">Partnership</span>
-                                    </a>
-                                </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="550" height="425" viewBox="0 0 512 512"><path fill="green" d="M320 176V16H32v480h128v-96h32v96h288V176ZM112 432H80v-32h32Zm0-80H80v-32h32Zm0-80H80v-32h32Zm0-80H80v-32h32Zm0-80H80V80h32Zm128-32h32v32h-32Zm-48 272h-32v-32h32Zm0-80h-32v-32h32Zm0-80h-32v-32h32Zm0-80h-32V80h32Zm80 320h-32v-32h32Zm0-80h-32v-32h32Zm0-80h-32v-32h32Zm0-80h-32v-32h32v32Zm176 272H320v-32h32v-32h-32v-48h32v-32h-32v-48h32v-32h-32v-32h128Z"/><path fill="green" d="M384 400h32v32h-32zm0-80h32v32h-32zm0-80h32v32h-32z"/></svg></span>
@@ -82,19 +76,11 @@
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li><!-- .nk-menu-item -->
-                                <li class="nk-menu-item has-sub">
-                                    <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 24"><path fill="green" d="M16 12c2.76 0 5-2.24 5-5s-2.24-5-5-5s-5 2.24-5 5s2.24 5 5 5m5.45 5.6c-.39-.4-.88-.6-1.45-.6h-7l-2.08-.73l.33-.94L13 16h2.8c.35 0 .63-.14.86-.37s.34-.51.34-.82c0-.54-.26-.91-.78-1.12L8.95 11H7v9l7 2l8.03-3c.01-.53-.19-1-.58-1.4M5 11H.984v11H5V11Z"/></svg></span>
+                                <li class="nk-menu-item">
+                                    <a href="{{ url('donation/manage') }}" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-growth-fill"></em></span>
                                         <span class="nk-menu-text">Donation</span>
                                     </a>
-                                    <ul class="nk-menu-sub">
-                                        <li class="nk-menu-item">
-                                            <a href="{{ url('donation/manage') }}" class="nk-menu-link"><span class="nk-menu-text">Manage</span></a>
-                                        </li>
-                                        <li class="nk-menu-item">
-                                            <a href="{{ url('donation/transactions') }}" class="nk-menu-link"><span class="nk-menu-text">Transactions</span></a>
-                                        </li>
-                                    </ul><!-- .nk-menu-sub -->
                                 </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item">
                                     <a href="{{ url('/ukm?filter=Enabled') }}" class="nk-menu-link">

@@ -67,11 +67,14 @@
                             <label class="form-label" for="fv-phone">Berita</label>
                             <div class="card">
                                 <div class="card-inner">
-                                    <input placeholder="Editor content goes here" type="hidden" name="content">
+                                    <!-- <input placeholder="Editor content goes here"  name="content" > -->
                 
-                                    <trix-editor id="generateBody" name="content">  
+                                    <!-- <trix-editor id="generateBody" name="content">  
 
-                                    </trix-editor>
+                                    </trix-editor> -->
+                                    <textarea name="content" id="generateBody" style="min-width:500px; max-width:100%; min-height:50px; height:100%; width:100%;">
+
+                                    </textarea>
                                 </div>
                                 <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalDefault">
                                     Buat konten dengan AI
