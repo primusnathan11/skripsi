@@ -166,7 +166,6 @@ Route::middleware(['auth', 'staff'])->group(function (){
         Route::get('/manage/add','add');
         Route::get('/manage/edit/{id}','edit')->name('edit.donation');
         Route::put('/manage/edit/{id}','update')->name('update.donation');
-        Route::get('/manage','getManage');
         Route::get('/transaction','getTransaction')->name('get.transaction');
         Route::get('/add','add');
         Route::post('/store', 'store')->name('store.donation');
