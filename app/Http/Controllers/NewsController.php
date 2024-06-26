@@ -24,12 +24,11 @@ class NewsController extends Controller
         ]);
 }
 public function generate_news(Request $request){
-    $test_data = "halo";
-
-    return response()->json($test_data);
     $prompt = $request->get('prompt');
-    $url = env('GEMINI_URL');
-    $accessToken = env('GEMINI_KEY');
+    // $url = "".env('GEMINI_URL')."";
+    $url = "https://us-central1-aiplatform.googleapis.com/v1/projects/herbify-403310/locations/us-central1/publishers/google/models/gemini-1.5-pro:streamGenerateContent";
+    // $accessToken = env('GEMINI_KEY');
+    $accessToken = "ya29.a0AXooCgs4TLr0Xix6AR9PWufnGLSxYlfE5uNe_JtwyS36K_yaDz0VEJtKOdRsr1A0nyfPIjdeZE75ZayREC852ycMY4At2XKYhWZQKR8n11BaUs7BnCOuyEloPQ8ZAzWT-4-RK-jN8c-PL8gAYmpuwwv9Mksxw9jcgWcnaKXa_jO1VxRcPyV0NiC7RbLIJnFXLFUUtGrq_n7AzayhmCmiQ1X3Ya2Tg_MdhsCyTWixrlqAPQIZx3y2N_83grdiOwSvlEwKToW3zJ_3y7Yoo8ALDnC5taUf2u11iJDjhkRYTWu51ltpELCnp7N4RiesAFC5Y7MZMIQa0JsMLFDxSOj1-0RKRvI2A591TJw8UMQJVd4LFGEXIzNEWzIoiNJhJixxk42M59I7VOSm3NNriBIoupNF7OiF8OcaCgYKATYSARISFQHGX2MiLgbCTWGdPdZqN9LtCCFG_g0422";
     $postData = [
         "contents" => [
             "role" => "user",
@@ -56,29 +55,33 @@ public function generate_news(Request $request){
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $response = curl_exec($ch);
+    curl_close($ch);
 
+    
     if (curl_errno($ch)) {
         $error_msg = curl_error($ch);
         curl_close($ch);
         return response()->json(['error' => $error_msg], 500);
     }
-    curl_close($ch);
-
+    
     $responseData = json_decode($response, true);
-    return response()->json($responseData);
+    // echo "<Pre>";
+    // print_r($responseData);die;
+    // return response()->json($responseData);
 
-    // $result = "";
-    //     foreach ($responseData as $item) {
-    //         if (isset($item['candidates'][0]['content']['parts'])) {
-    //             foreach ($item['candidates'][0]['content']['parts'] as $part) {
-    //                 $result .= $part['text'];
-    //             }
-    //         }
-    //     }
+    $result = "";
+        foreach ($responseData as $item) {
+            if (isset($item['candidates'][0]['content']['parts'])) {
+                foreach ($item['candidates'][0]['content']['parts'] as $part) {
+                    $result .= $part['text'];
+                }
+            }
+        }
 
-    //     $cleaned_data = str_replace('*', '', $result);
-    //     $data['result'] = $cleaned_data;
-
+        $cleaned_data = str_replace('*', '', $result);
+        $data['result'] = $cleaned_data;
+    
+    return response()->json($data);
 }
 
 

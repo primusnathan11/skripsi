@@ -66,16 +66,12 @@
                         
                             <label class="form-label" for="fv-phone">Berita</label>
                             <div class="card">
-                                <div class="card-inner">
-                                <input id="generateBody" type="hidden" name="content" >
-                                    <trix-editor input="generateBody" >  
-
+                                <div class="card-inner mb-1 pb-0">
+                                <input type="hidden" id="trix-wrap" name="content"  class="mb-2">
+                                    <trix-editor id="trix-content" >  
                                     </trix-editor>
-                                    <!-- <textarea name="content" id="generateBody" style="min-width:500px; max-width:100%; min-height:50px; height:100%; width:100%;">
-
-                                    </textarea> -->
                                 </div>
-                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalDefault">
+                                <button type="button" class="btn btn-link pt-0 mt-0 ml-4 pl-5" data-bs-toggle="modal" data-bs-target="#modalDefault">
                                     Buat konten dengan AI
                                 </button>
                             </div>
@@ -119,9 +115,9 @@
         <form id="keyprompt" >
             @csrf
             <input type="text" class="form-control" name="prompt" required>
-            <div class="modal-footer bg-light">
-                <button type="button" class="btn btn-primary" id="loadData">Generate</button>
-            </div>
+        </div>
+        <div class="modal-footer ">
+            <button type="button" class="btn btn-primary" id="loadData"><span>Generate</span></button>
         </form>
         </div>
     </div>
@@ -129,26 +125,27 @@
 
 
 <script>
-// <!-- Ajax Return Result on Textarea Code -->
 $(document).ready(function(){
     $('#loadData').click(function(event){
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault();
 
-        // Serialize form data to send to the server
         var formData = $('#keyprompt').serialize();
 
         $.ajax({
             url: "{{ route('generate.news') }}",
-            type: 'GET', // Ensure this matches your route's expected method
+            type: 'GET',
             data: formData,
+            beforeSend: function(){
+                $('#loadData').attr('disabled', true);
+                $('#loadData').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="blink">Mohon tunggu...</span>');
+            },
             success: function(response){
-                console.log(response);
-
                 $('#modalDefault').modal('hide');
-                // Assuming your response is like the one provided in the example
-                var generateBody = response.test_data;
-                // $('#generateBody').html(response); // Use .html() to set HTML content
-                $('#generateBody').val(response);
+                var generateBody = response.result;
+                $('#trix-wrap').val(generateBody);
+                $('#trix-content').val(generateBody);
+                $('#loadData').attr('disabled', false);
+                $('#loadData').html('<span>Generate</span>');
             },
             error: function(xhr, status, error){
                 console.log(error);
