@@ -25,6 +25,20 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-label" for="default-06">Select Company</label>
+                        <div class="form-control-wrap ">
+                            <div class="form-control-select">
+                                <select class="form-control" id="default-06" name="user_id">
+                                    @foreach ($partners as $p)
+                                        <option value="{{ $p->id }}">{{ $p->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="fv-subject">Deskripsi</label>
                                         <div class="form-control-wrap">
@@ -32,7 +46,7 @@
                                         </div>
                                 </div>
                             </div>
-                
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="fv-subject">Alamat</label>
@@ -41,7 +55,7 @@
                                         </div>
                                 </div>
                             </div>
-                
+
 
                     <div class="nk-block nk-block-lg">
                         <div class="nk-block-head">
@@ -67,7 +81,7 @@
                                         </div>
                                 </div>
                             </div>
-                                            
+
                     <div class="col-md-12">
                                 <button type="submit" class="btn btn-lg btn-primary"> Tambahkan Project </button>
                             </form>

@@ -20,6 +20,7 @@ class Project extends Model
         'user_id',
         'parner_id',
         'planting_date',
+        'nama_company',
     ];
 
     // protected $with = ['type'];
