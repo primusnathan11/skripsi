@@ -57,13 +57,13 @@ public function generate_news(Request $request){
     $response = curl_exec($ch);
     curl_close($ch);
 
-    
+
     if (curl_errno($ch)) {
         $error_msg = curl_error($ch);
         curl_close($ch);
         return response()->json(['error' => $error_msg], 500);
     }
-    
+
     $responseData = json_decode($response, true);
     // echo "<Pre>";
     // print_r($responseData);die;
@@ -80,7 +80,7 @@ public function generate_news(Request $request){
 
         $cleaned_data = str_replace('*', '', $result);
         $data['result'] = $cleaned_data;
-    
+
     return response()->json($data);
 }
 

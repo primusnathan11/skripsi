@@ -21,7 +21,7 @@
                                 <div class="toggle-expand-content" data-content="pageMenu">
                                     <ul class="nk-block-tools g-3">
                                         <li>
-                                            
+
                                         </li>
                                         <li class="nk-block-tools-opt d-none d-sm-block">
                                             <a href="{{ route('add.projects') }}"  class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Tambahkan Projek</span></a>
@@ -47,7 +47,7 @@
                                 </th>
                                 <th class="nk-tb-col"><span class="sub-text">Project Name</span></th>
                                 <th class="nk-tb-col tb-col-xxl"><span class="sub-text">Client</span></th>
-                                <th class="nk-tb-col tb-col-lg"><span class="sub-text">Project Lead</span></th>
+                                <th class="nk-tb-col tb-col-lg"><span class="sub-text">Company</span></th>
                                 <!-- <th class="nk-tb-col tb-col-lg"><span class="sub-text">Team</span></th> -->
                                 <!-- <th class="nk-tb-col tb-col-xxl"><span class="sub-text">Status</span></th> -->
                                 <!-- <th class="nk-tb-col tb-col-md"><span class="sub-text">Progress</span></th> -->
@@ -59,7 +59,7 @@
                                             <ul class="link-list-opt no-bdr">
                                                 <li><a href="#"><em class="icon ni ni-check-round-cut"></em><span>Mark As Done</span></a></li>
                                                 <li><a href="#"><em class="icon ni ni-archive"></em><span>Mark As Archive</span></a></li>
-                                                
+
                                             </ul>
                                         </div>
                                     </div>
@@ -80,6 +80,7 @@
                                         <!-- <div class="user-avatar sq bg-purple"><span>DD</span></div> -->
                                         <div class="project-info">
                                             <h6 class="title">{{ $project->name }}</h6>
+                                            <span>{{ Str::limit($project->description, 15) }}</span>
                                         </div>
                                     </a>
                                 </td>
@@ -87,9 +88,9 @@
                                     <span>Softnio</span>
                                 </td>
                                 <td class="nk-tb-col tb-col-lg">
-                                    <span>{{ $project->description }}</span>
+                                    <span>{{ $project->nama_company }}</span>
                                 </td>
-                                
+
                                 <td class="nk-tb-col tb-col-sm">
                                     <span class="badge badge-dim bg-warning"><em class="icon ni ni-clock"></em><span>{{ $project->planting_date }}</span></span>
                                 </td>
