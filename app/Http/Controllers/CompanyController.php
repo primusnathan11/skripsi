@@ -6,6 +6,8 @@ use App\Models\Partner;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class CompanyController extends Controller
 {
@@ -29,7 +31,9 @@ class CompanyController extends Controller
     }
 
     public function addProject(){
-        return view ('admin.company.project.add');
+        return view ('admin.company.project.add',[
+            'partners'=> Partner::get('*'),
+        ]);
     }
 
     public function edit($id){
@@ -93,22 +97,29 @@ class CompanyController extends Controller
             'description'=> 'required',
             'address'=> 'required',
             'photo'=> 'required',
+            'user_id'=> 'required',
             'planting_date'=> 'required',
-                
+
         ]);
+        $nama_company = DB::table('partners')
+                        ->where('id',$request->input('user_id'))
+                        ->pluck('name')
+                        ->first();
 
         if($request->file('photo')){
             $validatedData['photo'] = $request->file('photo')->store('images', 'public');
         }
 
         $photo = $request->file('photo')->store('images', 'public');
-        
+
 
         Project::create([
             'name' =>$request->input('name'),
             'description' =>$request->input('description'),
             'address' =>$request->input('address'),
             'photo' =>$photo,
+            'user_id'=>$request->input('user_id'),
+            'nama_company'=>$nama_company,
             'planting_date' =>$request->input('planting_date'),
         ]);
         return redirect()->route('projects')
@@ -147,7 +158,7 @@ class CompanyController extends Controller
             'address'=> 'required',
             'photo'=> 'required',
             'planting_date'=> 'required',
-                
+
         ]);
 
         $test = Project::where('id', $id)
