@@ -30,7 +30,7 @@
                             </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label class="form-label" for="fv-full-name">Penulis</label>
                         <div class="form-control-wrap">
@@ -38,17 +38,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="form-label" for="fv-phone">Slug</label>
-                        <div class="form-control-wrap">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="slug" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                     <div class="nk-block nk-block-lg">
                         <div class="nk-block-head">
                             <div class="nk-block-head-content">
@@ -63,19 +52,19 @@
                                     </div>
                             </div>
                         </div>
-                        
+
                             <label class="form-label" for="fv-phone">Berita</label>
                             <div class="card">
                                 <div class="card-inner mb-1 pb-0">
                                 <input type="hidden" id="trix-wrap" name="content"  class="mb-2">
-                                    <trix-editor id="trix-content" >  
+                                    <trix-editor id="trix-content" >
                                     </trix-editor>
                                 </div>
                                 <button type="button" class="btn btn-link pt-0 mt-0 ml-4 pl-5" data-bs-toggle="modal" data-bs-target="#modalDefault">
                                     Buat konten dengan AI
                                 </button>
                             </div>
-                            
+
                     </div>
                     <label class="form-label" for="isPublish"></label>
                                             <div class="col-md-6">

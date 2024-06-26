@@ -28,7 +28,7 @@ public function generate_news(Request $request){
     // $url = "".env('GEMINI_URL')."";
     $url = "https://us-central1-aiplatform.googleapis.com/v1/projects/herbify-403310/locations/us-central1/publishers/google/models/gemini-1.5-pro:streamGenerateContent";
     // $accessToken = env('GEMINI_KEY');
-    $accessToken = "ya29.a0AXooCgs4TLr0Xix6AR9PWufnGLSxYlfE5uNe_JtwyS36K_yaDz0VEJtKOdRsr1A0nyfPIjdeZE75ZayREC852ycMY4At2XKYhWZQKR8n11BaUs7BnCOuyEloPQ8ZAzWT-4-RK-jN8c-PL8gAYmpuwwv9Mksxw9jcgWcnaKXa_jO1VxRcPyV0NiC7RbLIJnFXLFUUtGrq_n7AzayhmCmiQ1X3Ya2Tg_MdhsCyTWixrlqAPQIZx3y2N_83grdiOwSvlEwKToW3zJ_3y7Yoo8ALDnC5taUf2u11iJDjhkRYTWu51ltpELCnp7N4RiesAFC5Y7MZMIQa0JsMLFDxSOj1-0RKRvI2A591TJw8UMQJVd4LFGEXIzNEWzIoiNJhJixxk42M59I7VOSm3NNriBIoupNF7OiF8OcaCgYKATYSARISFQHGX2MiLgbCTWGdPdZqN9LtCCFG_g0422";
+    $accessToken = "ya29.a0AXooCgtenoAc6bUuG4nktTzjf_S-AEWEJmJw_-C8mttC-4LAyf14vhfRWfxLOgHhY3Y2jAcsKF2QyCyjD0ZKVfOnMbpEQB3ey0SWzH65mAS7QDtwjzKECtaVgls0RnpSn5ilq4yXZyYVTglpZqAHDnH7Q6psLg1gqHnvXfdtNjVLcXU3ue69luaHz09RVVCkcehdtJG6-NucA4hweonDq2EEiWQS32tMkUrvHF9CDkxdH-8sYOz2CIgtWvnWdaw5YzW9vGVlVIUte4E1oU3_swNtn9f7eqZ4F1cZ4aqcE9Cac28dPFAywInZ72qF4QSa06roHiVxqybcTY5Vrv7JoKOCmH_3avGlJzLzmxPvWDndKkiuPg7ygR9RGMUyLnZhgFENlfi-Td2Ve04i6g5Qid8J_IgpJIYaCgYKAe4SARISFQHGX2MiVj7itqUjN7pyaxa6qsMhjw0422";
     $postData = [
         "contents" => [
             "role" => "user",
@@ -98,7 +98,6 @@ public function store(Request $request)
     {
         $validatedData = Validator::make($request->all(), [
             'title' => 'required',
-            'slug' => 'required',
             'content' => 'nullable',
             'image' => 'nullable|mimes:jpg,jpeg,png,bmp|max:1024',
             'author' => 'required',
@@ -116,12 +115,11 @@ public function store(Request $request)
             // $data = $content['prompt'];
             // $content = $request->input('content');
 
-
-
+        $slug = Str::slug($request->input('title'),'-');
 
         NewsArticle::create([
             'title' =>$request->input('title'),
-            'slug' =>$request->input('slug'),
+            'slug' =>$slug,
             'content' =>$request->input('content'),
             // 'content' =>$content,
             'image' =>$image,
