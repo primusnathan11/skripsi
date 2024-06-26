@@ -30,14 +30,6 @@
                             </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="form-label" for="fv-full-name">Penulis</label>
-                        <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="fv-full-name" name="author" required>
-                        </div>
-                    </div>
-                </div>
                     <div class="nk-block nk-block-lg">
                         <div class="nk-block-head">
                             <div class="nk-block-head-content">

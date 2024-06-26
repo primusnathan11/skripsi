@@ -28,7 +28,7 @@ public function generate_news(Request $request){
     // $url = "".env('GEMINI_URL')."";
     $url = "https://us-central1-aiplatform.googleapis.com/v1/projects/herbify-403310/locations/us-central1/publishers/google/models/gemini-1.5-pro:streamGenerateContent";
     // $accessToken = env('GEMINI_KEY');
-    $accessToken = "ya29.a0AXooCgtenoAc6bUuG4nktTzjf_S-AEWEJmJw_-C8mttC-4LAyf14vhfRWfxLOgHhY3Y2jAcsKF2QyCyjD0ZKVfOnMbpEQB3ey0SWzH65mAS7QDtwjzKECtaVgls0RnpSn5ilq4yXZyYVTglpZqAHDnH7Q6psLg1gqHnvXfdtNjVLcXU3ue69luaHz09RVVCkcehdtJG6-NucA4hweonDq2EEiWQS32tMkUrvHF9CDkxdH-8sYOz2CIgtWvnWdaw5YzW9vGVlVIUte4E1oU3_swNtn9f7eqZ4F1cZ4aqcE9Cac28dPFAywInZ72qF4QSa06roHiVxqybcTY5Vrv7JoKOCmH_3avGlJzLzmxPvWDndKkiuPg7ygR9RGMUyLnZhgFENlfi-Td2Ve04i6g5Qid8J_IgpJIYaCgYKAe4SARISFQHGX2MiVj7itqUjN7pyaxa6qsMhjw0422";
+    $accessToken = "ya29.a0AXooCgvNTHRnYIEbNxbRzkCFR43_wJj6X4-XjUpOCgS4-Ym8CXlErIA-zTyISrMg9eV47Wi8fEcTPsM6_OneW1AXBQpi6t__QCp1Kahu-KeTQ2wE8ORGnSy3l3mfrj_EaucdQIyS8v9Qm1F2h6DgJayZbXGL-7POUbU56GMy3jmoD4Si8PvYX-ue2M7MNuU-XE78BOYpIQj1Mt_ZfatwFYpsRsTHnvDeP9FY6MzEgC0Q0hchg8Z9gctpIJmfHgN1vDK2ayX020xZZHrF6OmT2v1o4lY6AyuuoLicbhqKNfm16zfMG583ub1giO1v4AKzsYaKkra8R5Wq6hIWS4HqttXKOnBI2sQ59HVUtrkGQqfvSHlrpybWdLAEOHJVvKWTzGJ5dQIyOYvIgyVNqZ65DhbyA0dlx-MaCgYKAcoSARISFQHGX2Mid5w4o30fsTpchGe6Amt4Fg0422";
     $postData = [
         "contents" => [
             "role" => "user",
@@ -100,7 +100,6 @@ public function store(Request $request)
             'title' => 'required',
             'content' => 'nullable',
             'image' => 'nullable|mimes:jpg,jpeg,png,bmp|max:1024',
-            'author' => 'required',
             'is_publish' => 'nullable|boolean:0,1,true,false'
         ]);
 
@@ -116,6 +115,7 @@ public function store(Request $request)
             // $content = $request->input('content');
 
         $slug = Str::slug($request->input('title'),'-');
+        $writer = Auth::user()->name;
 
         NewsArticle::create([
             'title' =>$request->input('title'),
@@ -123,7 +123,7 @@ public function store(Request $request)
             'content' =>$request->input('content'),
             // 'content' =>$content,
             'image' =>$image,
-            'author' =>$request->input('author'),
+            'author' =>$writer,
             'is_publish' => $request->input('type'),
         ]);
 

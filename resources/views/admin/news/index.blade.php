@@ -19,7 +19,7 @@
                                                 <div class="toggle-expand-content" data-content="pageMenu">
                                                     <ul class="nk-block-tools g-3">
                                                         <li class="nk-block-tools-opt d-none d-sm-block">
-                                                            <a href="{{ url('/newsletter/add') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add Project</span></a>
+                                                            <a href="{{ url('/newsletter/add') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add News</span></a>
                                                         </li>
                                                         <li class="nk-block-tools-opt d-block d-sm-none">
                                                             <a href="#" class="btn btn-icon btn-primary"><em class="icon ni ni-plus"></em></a>
