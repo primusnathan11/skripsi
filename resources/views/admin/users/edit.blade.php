@@ -32,9 +32,9 @@
                             </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="fv-subject">Password</label>
+                        <label class="form-label" for="fv-subject">Password <small class="text-danger"> kosongi jika sama</small></label>
                             <div class="form-control-wrap">
-                                <input type="password" class="form-control" id="fv-subject" name="password" value="{{ $user->password }}" required>
+                                <input type="password" class="form-control" id="fv-subject" name="password" value="" >
                             </div>
                     </div>
                     <div class="form-group">

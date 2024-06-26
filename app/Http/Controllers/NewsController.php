@@ -24,9 +24,9 @@ class NewsController extends Controller
         ]);
 }
 public function generate_news(Request $request){
-    // $test_data = "halo";
+    $test_data = "halo";
 
-    // return response()->json($test_data);
+    return response()->json($test_data);
     $prompt = $request->get('prompt');
     $url = env('GEMINI_URL');
     $accessToken = env('GEMINI_KEY');

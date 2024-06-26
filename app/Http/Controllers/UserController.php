@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 
 class UserController extends Controller
@@ -41,7 +42,8 @@ public function store(Request $request)
         'email' =>$request->input('email'),
         'telp' =>$request->input('telp'),
         'role' => $request->input('role'),
-        'password' => $request->input('password'),
+        'password' => Hash::make($request->input('password')),
+        // 'password' => $request->input('password'),
         
     ]);
 
@@ -59,17 +61,32 @@ public function update(Request $request, $id)
         'email' => 'required',
         'telp' => 'required',
         'role' => 'required',
-        'password' => 'required'
+        'password' => 'nullable'
 
     ]);
-
-    $test = User::where('id', $id)
-    ->update($validatedData);
-
+    // $data = User::where('id', $id)->first();
+    $user = User::findOrFail($id);
+    if($request->input('password')){
+        // $test = User::where('id', $id)
+        // ->update($validatedData);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'telp' => $request->telp,
+            'role' => $request->role,
+            'password' => Hash::make($request->password)
+        ]);
+    }else{
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'telp' => $request->telp,
+            'role' => $request->role
+        ]);
+    }
 
     return redirect()->route('user')
     ->with('success', 'Data Berhasil diupdate');
-
 }
 
 public function destroy($id){

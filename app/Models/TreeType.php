@@ -12,10 +12,10 @@ class TreeType extends Model
     protected $table = "tree_types";
 
     protected $fillable = [
-        'partner_id',
+        // 'partner_id',
         'name',
         'description',
-        'sequestration',
+        // 'sequestration',
         'is_adopted',
         'project_id',
     ];

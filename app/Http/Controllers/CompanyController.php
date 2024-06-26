@@ -134,7 +134,7 @@ class CompanyController extends Controller
         ->update($validatedData);
 
 
-        return redirect()->route('company/projects')
+        return redirect()->route('company')
         ->with('success', 'Data Berhasil diupdate');
 
     }

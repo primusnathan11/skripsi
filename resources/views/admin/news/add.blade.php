@@ -67,22 +67,19 @@
                             <label class="form-label" for="fv-phone">Berita</label>
                             <div class="card">
                                 <div class="card-inner">
-                                    <!-- <input placeholder="Editor content goes here"  name="content" > -->
-                
-                                    <!-- <trix-editor id="generateBody" name="content">  
+                                <input id="generateBody" type="hidden" name="content" >
+                                    <trix-editor input="generateBody" >  
 
-                                    </trix-editor> -->
-                                    <textarea name="content" id="generateBody" style="min-width:500px; max-width:100%; min-height:50px; height:100%; width:100%;">
+                                    </trix-editor>
+                                    <!-- <textarea name="content" id="generateBody" style="min-width:500px; max-width:100%; min-height:50px; height:100%; width:100%;">
 
-                                    </textarea>
+                                    </textarea> -->
                                 </div>
                                 <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalDefault">
                                     Buat konten dengan AI
                                 </button>
                             </div>
-                            <div id="bodyGenerate">
-
-                            </div>
+                            
                     </div>
                     <label class="form-label" for="isPublish"></label>
                                             <div class="col-md-6">
@@ -149,7 +146,7 @@ $(document).ready(function(){
 
                 $('#modalDefault').modal('hide');
                 // Assuming your response is like the one provided in the example
-                var generateBody = response.cleaned_data;
+                var generateBody = response.test_data;
                 // $('#generateBody').html(response); // Use .html() to set HTML content
                 $('#generateBody').val(response);
             },
